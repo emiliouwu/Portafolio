@@ -1,0 +1,50 @@
+{% extends 'index.html' %} 
+
+{% block title %}
+  Listado de Usuarios
+{% endblock title %}
+
+{% block body %}
+
+    {% if usuarios %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre de Usuario</th>
+                    <th>Correo</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Usuario Funcionario</th>
+                    <th>Usuario Administrador</th>
+                    <th>Usuario Diseñador</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id_usuario }}</td>
+                        <td>{{ usuario.nombre_usuario }}</td>
+                        <td>{{ usuario.correo }}</td>
+                        <td>{{ usuario.nombres }}</td>
+                        <td>{{ usuario.apellidos }}</td>
+                        <td>{{ usuario.usuario_funcionario }}</td>
+                        <td>{{ usuario.usuario_administrador }}</td>
+                        <td>{{ usuario.usuario_diseñador_procesos }}</td>
+                        <td>
+                            <a href="{% url 'gestion_usuario:editar_usuario' usuario.id_usuario %}">Editar</a>
+                            <a href="{% url 'gestion_usuario:eliminar_usuario' usuario.id_usuario %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+        <h1>No existen usuarios registrados</h1>
+
+    {% endif %}
+
+{% endblock body %}

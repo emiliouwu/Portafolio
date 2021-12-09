@@ -1,0 +1,13 @@
+{% extends 'index.html' %} 
+
+{% block title %}
+  Eliminación de Usuarios
+{% endblock title %}
+{% block body %}
+<form method="POST">
+      {% csrf_token %}
+      <h2>¿Desea eliminar el usuario {{ usuario.nombre_usuario }}?</h2>
+        <button type = "submit">Eliminar</button>   
+        <a href="{% url 'gestion_usuario:listar_usuario' %}">Cancelar</a>
+</form>
+{% endblock body %}
