@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.gestion_usuario',
     'apps.crear_tareas',
-    'import_export',
+    
 
 ]
 
