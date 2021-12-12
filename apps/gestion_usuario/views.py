@@ -1,8 +1,11 @@
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
+
+from apps.gestion_usuario.utils import render_a_pdf
 from .models import Usuario
 from .forms import UsuarioForm
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.views.generic import View
 
 def Home(request):
     return render(request,'index.html')
@@ -21,6 +24,17 @@ def crearUsuario(request):
 def listarUsuario(request):
     usuarios = Usuario.objects.filter(estado = True)
     return render(request, 'gestion_usuario/listar_usuario.html', {'usuarios':usuarios})
+
+class listarUsuariosPdf(View):
+    
+    def get(self, request. *args, **kwags):
+        usuarios = Usuario.objects.all()
+        data = {
+            'usuarios':usuarios
+        }
+        pdf = render_a_pdf('gestion_usuario/listar_usuario.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
 
 def editarUsuario(request, id_usuario):
     usuario_form = None

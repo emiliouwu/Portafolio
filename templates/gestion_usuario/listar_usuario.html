@@ -1,28 +1,23 @@
-{% extends 'index.html' %} 
-
-{% block title %}
-  Listado de Usuarios
-{% endblock title %}
-
 {% block body %}
-
-    {% if usuarios %}
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre de Usuario</th>
-                    <th>Correo</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Usuario Funcionario</th>
-                    <th>Usuario Administrador</th>
-                    <th>Usuario Diseñador</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for usuario in usuarios %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <table class="table bg-white rounded border">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre de Usuario</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Apellidos</th>
+                        <th scope="col">Usuario Funcionario</th>
+                        <th scope="col">Usuario Administrador</th>
+                        <th scope="col">Usuario Diseñador</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
                     <tr>
                         <td>{{ usuario.id_usuario }}</td>
                         <td>{{ usuario.nombre_usuario }}</td>
@@ -38,13 +33,9 @@
                         </td>
                     </tr>
                 {% endfor %}
-            </tbody>
-        </table>
-
-    {% else %}
-
-        <h1>No existen usuarios registrados</h1>
-
-    {% endif %}
-
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock body %}
