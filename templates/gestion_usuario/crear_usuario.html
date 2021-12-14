@@ -10,24 +10,14 @@
         <h2>{{ error }}</h2>
       {% else %}
 
-      <label>Nombre de Usuario</label>
-      <input type="text" name="nombre_usuario">
-      <label>Correo</label>
-      <input type="text" name="correo">
-      <label>Nombres</label>
-      <input type="text" name="nombres">
-      <label>Apellidos</label>
-      <input type="text" name="apellidos">
-      
-      
-      <label><input type="checkbox" id="cbox1" value="first_checkbox"> Usuario Funcionario </label><br>
-      <label><input type="checkbox" id="cbox2" value="first_checkbox"> Usuario Administrador</label><br>
-      <label><input type="checkbox" id="cbox3" value="first_checkbox"> Usuario Diseñador</label><br>
+        {{ usuario_form.as_p}}
 
-        
-        <button type = "submit">Crear</button>
       {% endif %}
+
+        <button type = "submit">Crear</button>
+      
      
       
 </form>
 {% endblock body %}
+

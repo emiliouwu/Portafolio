@@ -1,11 +1,14 @@
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-
-from apps.gestion_usuario.utils import render_a_pdf
 from .models import Usuario
 from .forms import UsuarioForm
 from django.core.exceptions import ObjectDoesNotExist
-from django.views.generic import View
+
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
 
 def Home(request):
     return render(request,'index.html')
@@ -24,16 +27,6 @@ def crearUsuario(request):
 def listarUsuario(request):
     usuarios = Usuario.objects.filter(estado = True)
     return render(request, 'gestion_usuario/listar_usuario.html', {'usuarios':usuarios})
-
-class listarUsuariosPdf(View):
-    
-    def get(self, request. *args, **kwags):
-        usuarios = Usuario.objects.all()
-        data = {
-            'usuarios':usuarios
-        }
-        pdf = render_a_pdf('gestion_usuario/listar_usuario.html', data)
-        return HttpResponse(pdf, content_type='application/pdf')
 
 
 def editarUsuario(request, id_usuario):
@@ -55,9 +48,34 @@ def editarUsuario(request, id_usuario):
 
 def eliminarUsuario(request, id_usuario):
     usuario = Usuario.objects.get(id_usuario = id_usuario)
-    if request.method == 'POST':
-        usuario.estado = False
-        usuario.save()
-        return redirect('gestion_usuario:listar_usuario')
-    return render(request,'gestion_usuario/eliminar_usuario.html', {'usuario':usuario})
+    usuario.delete()
+    return render(request,'gestion_usuario/eliminar_usuario.html')
 
+def usuario_pdf(request):
+    
+    buf = io.BytesIO()
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 14)
+
+    usuarios = Usuario.objects.all()
+
+    lines = []
+
+    for usuario in usuarios:
+        lines.append(usuario.nombre_usuario)
+        lines.append(usuario.correo)
+        lines.append(usuario.nombres)
+        lines.append(usuario.apellidos)
+        lines.append(" ")
+
+    for line in lines:
+        textob.textLine(line)
+
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='usuario.pdf')
