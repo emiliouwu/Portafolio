@@ -1,10 +1,37 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  Lista de usuarios
+{% endblock title %}
+
+{%block imagen %}
+  {%static 'assets/img/listar_usuario.jpg'%}
+{% endblock imagen %}
+
+{% block titulo %}
+  Lista de usuarios
+{% endblock titulo %}
+
+{%block titulo_principal %}
+  Lista de usuarios
+{% endblock titulo_principal %}
+
+{%block titulo_secundario %}
+
+{% endblock titulo_secundario %}
+
 {% block body %}
-<div class="container mt-5">
+
+{%block posicion %}
+ <div class="row gx-4 gx-lg-5 justify-content-left">
+{%endblock posicion %}
+  <div class="container mt-5">
+
     <div class="row">
         <div class="col-md-8 mx-auto">
-            <h3>Lista de Usuarios</h3>
-            
             <table class="table bg-white rounded border">
+
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -37,7 +64,15 @@
                 {% endfor %}
                 </tbody>
             </table>
+
         </div>
     </div>
+
 </div>
+
+
 {% endblock body %}
+
+
+{%block post %}
+{%endblock post %}

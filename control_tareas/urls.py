@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('gestion_usuario/', include(('apps.gestion_usuario.urls', 'gestion_usuario'))),
     path('home/', Home, name = 'index'),
-    
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-  Creacion de Usuarios
+  Creacion de Tareas
 {% endblock title %}
 
 {%block imagen %}
@@ -10,11 +10,11 @@
 {% endblock imagen %}
 
 {% block titulo %}
-  Crear Usuarios
+  Crear Tarea
 {% endblock titulo %}
 
 {%block titulo_principal %}
-  Crear usuarios
+  Crear Tareas
 {% endblock titulo_principal %}
 
 {%block titulo_secundario %}
@@ -28,7 +28,7 @@
     <h2>{{ error }}</h2>
   {% else %}
 
-    {{ usuario_form.as_p}}
+    {{ tarea_form.as_p}}
 
   {% endif %}
 

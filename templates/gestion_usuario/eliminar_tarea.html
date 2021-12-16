@@ -1,43 +1,35 @@
 {% extends 'index.html' %}
+
 {% load staticfiles %}
 
+
 {% block title %}
-  Creacion de Usuarios
+  Eliminar Tarea
 {% endblock title %}
 
 {%block imagen %}
-  {%static 'assets/img/crear_usuario.png'%}
+  {%static 'assets/img/eliminar_tarea.jpg'%}
 {% endblock imagen %}
 
 {% block titulo %}
-  Crear Usuarios
+  Eliminar Tarea
 {% endblock titulo %}
 
 {%block titulo_principal %}
-  Crear usuarios
+
 {% endblock titulo_principal %}
 
 {%block titulo_secundario %}
 
 {% endblock titulo_secundario %}
+
 {% block body %}
-
 <form method="POST">
-  {% csrf_token %}
-  {% if error %}
-    <h2>{{ error }}</h2>
-  {% else %}
-
-    {{ usuario_form.as_p}}
-
-  {% endif %}
-
-    <button type = "submit">Crear</button>
-  
- 
-  
+      {% csrf_token %}
+      <h3>¿Desea eliminar la tarea {{ tarea.nombre_tarea }}?</h3>
+        <button type = "submit">Eliminar</button>
+      <a href="{% url 'gestion_usuario:listar_tarea' %}">Cancelar</a>
 </form>
-
 {% endblock body %}
 
 {%block post %}

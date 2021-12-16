@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  Lista de tareas
+{% endblock title %}
+
+{%block imagen %}
+  {%static 'assets/img/listar_tarea.jpg'%}
+{% endblock imagen %}
+
+{% block titulo %}
+  Lista de tareas
+{% endblock titulo %}
+
+{%block titulo_principal %}
+  Lista de tareas
+{% endblock titulo_principal %}
+
+{%block titulo_secundario %}
+
+{% endblock titulo_secundario %}
+
+{% block body %}
+
+{%block posicion %}
+ <div class="row gx-4 gx-lg-5 justify-content-left">
+{%endblock posicion %}
+  <div class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <table class="table bg-white rounded border">
+
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre de la tarea</th>
+                        <th scope="col">Responsable</th>
+                        <th scope="col">Fecha de entrega</th>
+                        <th scope="col">Especificacion</th>
+                        <th scope="col">Tarea relacion</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tarea in tareas %}
+                    <tr>
+                        <td>{{ tarea.id_tarea }}</td>
+                        <td>{{ tarea.nombre_tarea }}</td>
+                        <td>{{ tarea.responsable }}</td>
+                        <td>{{ tarea.fecha_entrega }}</td>
+                        <td>{{ tarea.especificacion }}</td>
+                        <td>{{ tarea.tarea_relacion }}</td>
+                        <td>
+                            <a href="{% url 'gestion_usuario:editar_tarea' tarea.id_tarea %}">Editar</a>
+                            <a href="{% url 'gestion_usuario:eliminar_tarea' tarea.id_tarea %}">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock body %}
+
+{%block post %}
+{%endblock post %}

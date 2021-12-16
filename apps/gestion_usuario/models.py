@@ -13,14 +13,14 @@ class Usuario(models.Model):
     fecha_creacion = models.DateField(auto_now=True, auto_now_add=False)
     
 
-class Meta:
-        verbose_name = 'Usuario'
-        verbose_name_plural = 'Usuarios'
-        ordering = ['nombre_user']
+    class Meta:
+        verbose_name = 'usuario'
+        verbose_name_plural = 'usuarios'
+        ordering = ['nombre_usuario']
 
 
-def __str__(self):
-    return self.nombre_user
+    def __str__(self):
+        return self.nombre_usuario
 
 
 class Post(models.Model):
@@ -30,4 +30,20 @@ class Post(models.Model):
 
 
 
+class Tarea(models.Model):
+    id_tarea = models.AutoField(primary_key=True)
+    nombre_tarea = models.CharField(max_length=30, blank= False, null= False)
+    # para hacer la FK
+    responsable = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    fecha_entrega= models.DateField(blank= False, null= False)
+    especificacion = models.CharField(max_length=100, blank= False, null= True)
+    tarea_relacion = models.CharField(max_length=30, blank= False, null= True)
+    
+    
 
+    class Meta:
+        verbose_name = 'tarea' 
+        verbose_name_plural = 'tareas' 
+
+    def __str__(self):
+        return self.nombre_tarea
